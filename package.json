@@ -1,7 +1,9 @@
 {
   "dependencies": {
+    "blade": "^3.3.1",
     "express": "^4.16.4",
     "fs": "0.0.1-security",
+    "pug": "^2.0.3",
     "react": "^16.6.3",
     "webpack": "^4.26.1"
   },
