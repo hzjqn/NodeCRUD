@@ -1,0 +1,29 @@
+{
+  "dependencies": {
+    "express": "^4.16.4",
+    "fs": "0.0.1-security",
+    "react": "^16.6.3",
+    "webpack": "^4.26.1"
+  },
+  "name": "nodecrud",
+  "version": "1.0.0",
+  "description": "Json powered CRUD",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hzjqn/NodeCRUD.git"
+  },
+  "keywords": [
+    "CRUD"
+  ],
+  "author": "Joaquin Hernandez Zubiri",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hzjqn/NodeCRUD/issues"
+  },
+  "homepage": "https://github.com/hzjqn/NodeCRUD#readme"
+}
