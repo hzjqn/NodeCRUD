@@ -1,13 +1,25 @@
-const express = require('express')
-const fs = require('fs')
-const Persona = require('./classes/persona.js')
-const app = express()
-const port = 3000
+const express = require('express');
+const fs = require('fs');
+const pug = require('pug');
+const Persona = require('./classes/persona.js');
+const app = express();
+const port = 3000;
+
+app.use(express.static('public'));
+app.set('views', './views')
+app.set('view engine', 'pug')
 
 
 // APP/Frontend Routes
 app.get('/', (req, res) => {
-    return res.send()
+
+    let vars = {
+        title: "Titulo",
+        view: pug.renderFile('./views/index.pug')
+    };
+
+    console.log(vars);
+    return res.render('app', vars);
 });
 
 
