@@ -1,0 +1,20 @@
+nav.navbar
+    ul
+    
+        li.brand personas.json
+        li
+            form(id="searchForm" action="/persona/search" method="get")
+                label(for="search")
+                    i.fas.fa-search
+                input(name="search" placeholder="Un nombre, apellido o email" id="searchBar" type="text")
+        
+        li.actions.column
+            a(data-action="goto" href='/persona/new')
+                span
+                    i.fas.fa-plus 
+                span Agregar persona
+
+            a(data-action="goto" href='/persona/index')
+                span
+                    i.fas.fa-list 
+                span Ver personas

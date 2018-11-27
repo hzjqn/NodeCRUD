@@ -1,0 +1,124 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Work+Sans:300,400,700')
+    
+// Colors
+$_almost_white: #eee
+$_white: #fff
+$_black: #323232
+$_primary: #0099ff
+
+body
+    margin: 0px
+    padding: 0px
+    background: $_almost_white
+    font-family: 'Work Sans', sans-serif
+    font-weight: 300
+    font-size: 18px
+
+    * 
+        box-sizing: border-box
+
+a
+    color: $_primary
+
+nav.navbar
+    display: block
+    background: red
+    background: $_white
+    padding: 8px 16px
+
+    ul
+        display: flex
+        flex-direction: column
+        justify-content: center
+        align-items: center
+        list-style: none
+        margin: 0px
+        padding: 0px
+
+        @media (min-width: 480px)
+            &
+                flex-direction: row
+
+        li
+            &.brand
+                padding: 16px
+            form#searchForm
+                color: $_black
+                display: flex
+                flex-direction: row
+                justify-content: center
+                align-items: center
+                label
+                    width: 32px
+                    height: 32px
+                    display: inline-flex
+                    justify-content: center
+                    align-items: center
+                input#searchBar
+                    font-size: 1em
+                    line-height: 1.25em
+                    padding: 8px
+                    border: none
+                    background: $_almost_white
+                    border-radius: 2px
+                    outline: none
+
+.container
+    width: 100%
+    max-width: 600px
+    margin: 0 auto
+    padding: 1em
+
+.highlight
+    font-weight: 600
+    color: $_primary
+
+
+.actions
+        display: flex
+        
+        &.column    
+            flex-direction: column
+        a
+            text-decoration: none
+            display: block
+            padding: .5em
+            i
+                display: inline-flex
+                justify-content: center
+                align-items: center
+                width: 24px
+                height: 24px
+            span
+                padding: .5em
+
+.card
+    &.persona
+        background: $_white
+        border-radius: .25em
+        padding: .5em
+        margin: .5em 0px
+
+        .card-info
+            display: flex
+            flex-direction: column
+            justify-content: space-between
+            align-items: center
+            @media (min-width:480px)
+                &
+                    flex-direction: row 
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6
+            display: block
+            width: 100%
+            overflow: hidden
+            margin: 0px
+            word-wrap: no-wrap
+            font-weight: 300
+            text-overflow: ellipsis

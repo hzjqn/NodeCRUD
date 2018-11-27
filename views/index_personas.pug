@@ -1,0 +1,17 @@
+a(data-action="goto" href="/restore")
+    i.fas.fa-arrow-left
+h3 Index
+if results !== undifined
+    each result in results
+        article.card.persona 
+            .card-info
+                div.info
+                    h4.card-title #{result.found.nombre+ ' ' +result.found.apellido}
+                    h5 ID: #{result.found.id}
+                    h5 Email: #{result.found.email}
+                div.actions
+                    a(data-action="goto" href='/persona/'+result.found.id)
+                        i.fas.fa-arrow-right
+
+    else
+        span.msg.sorry No se han encontrado usuarios que correspondan a su busqueda.

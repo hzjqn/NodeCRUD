@@ -1,0 +1,16 @@
+h3 Resultados de la busqueda
+if results !== undifined
+    each result in results
+        article.card.persona(data-id=+result.found.id)
+            - var title = result.found.nombre.replace(result.searched, "<span class='highlight'>"+result.searched+"</span>") + ' ' + result.found.apellido.replace(result.searched, "<span class='highlight'>"+result.searched+"</span>")
+            - var email = result.found.email.replace(result.searched, "<span class='highlight'>"+result.searched+"</span>")
+            .card-info
+                div.info
+                    h4.card-title !{title}
+                    h5 ID: #{result.found.id}
+                    h5 Email: !{email}
+                div.actions
+                    a(data-action="goto" data-id=+result.found.id href='/persona/'+result.found.id)
+                        i.fas.fa-arrow-right
+    else
+        span.msg.sorry No se han encontrado usuarios que correspondan a su busqueda.

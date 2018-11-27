@@ -1,0 +1,15 @@
+article.card.persona
+    h1 #{result.found.nombre + " " + result.found.apellido}
+    h3 Id: #{result.found.id}
+    h3 Nombre: #{result.found.nombre}
+    h3 Apellido: #{result.found.apellido}
+    h3 Email: #{result.found.email}
+    h3 Confirmado: #{result.found.confirmado ? "Si" : "No"} 
+
+    aside.actions
+        a(data-action="goto" href="/persona/"+result.found.id+'/edit')
+            i.fas.fa-edit
+        
+        a(data-action="delete" href="/persona/"+result.found.id)
+            i.fas.fa-trash
+

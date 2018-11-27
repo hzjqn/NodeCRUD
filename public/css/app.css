@@ -1,0 +1,129 @@
+@import url("https://fonts.googleapis.com/css?family=Work+Sans:300,400,700");
+/* line 10, ../../resources/css/app.sass */
+body {
+  margin: 0px;
+  padding: 0px;
+  background: #eee;
+  font-family: "Work Sans", sans-serif;
+  font-weight: 300;
+  font-size: 18px; }
+  /* line 18, ../../resources/css/app.sass */
+  body * {
+    box-sizing: border-box; }
+
+/* line 21, ../../resources/css/app.sass */
+a {
+  color: #0099ff; }
+
+/* line 24, ../../resources/css/app.sass */
+nav.navbar {
+  display: block;
+  background: red;
+  background: #fff;
+  padding: 8px 16px; }
+  /* line 30, ../../resources/css/app.sass */
+  nav.navbar ul {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    margin: 0px;
+    padding: 0px; }
+    @media (min-width: 480px) {
+      /* line 40, ../../resources/css/app.sass */
+      nav.navbar ul {
+        flex-direction: row; } }
+    /* line 44, ../../resources/css/app.sass */
+    nav.navbar ul li.brand {
+      padding: 16px; }
+    /* line 46, ../../resources/css/app.sass */
+    nav.navbar ul li form#searchForm {
+      color: #323232;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center; }
+      /* line 52, ../../resources/css/app.sass */
+      nav.navbar ul li form#searchForm label {
+        width: 32px;
+        height: 32px;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center; }
+      /* line 58, ../../resources/css/app.sass */
+      nav.navbar ul li form#searchForm input#searchBar {
+        font-size: 1em;
+        line-height: 1.25em;
+        padding: 8px;
+        border: none;
+        background: #eee;
+        border-radius: 2px;
+        outline: none; }
+
+/* line 67, ../../resources/css/app.sass */
+.container {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 1em; }
+
+/* line 73, ../../resources/css/app.sass */
+.highlight {
+  font-weight: 600;
+  color: #0099ff; }
+
+/* line 78, ../../resources/css/app.sass */
+.actions {
+  display: flex; }
+  /* line 81, ../../resources/css/app.sass */
+  .actions.column {
+    flex-direction: column; }
+  /* line 83, ../../resources/css/app.sass */
+  .actions a {
+    text-decoration: none;
+    display: block;
+    padding: 0.5em; }
+    /* line 87, ../../resources/css/app.sass */
+    .actions a i {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      width: 24px;
+      height: 24px; }
+    /* line 93, ../../resources/css/app.sass */
+    .actions a span {
+      padding: 0.5em; }
+
+/* line 97, ../../resources/css/app.sass */
+.card.persona {
+  background: #fff;
+  border-radius: 0.25em;
+  padding: 0.5em;
+  margin: 0.5em 0px; }
+  /* line 103, ../../resources/css/app.sass */
+  .card.persona .card-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center; }
+    @media (min-width: 480px) {
+      /* line 109, ../../resources/css/app.sass */
+      .card.persona .card-info {
+        flex-direction: row; } }
+  /* line 112, ../../resources/css/app.sass */
+  .card.persona h1,
+  .card.persona h2,
+  .card.persona h3,
+  .card.persona h4,
+  .card.persona h5,
+  .card.persona h6 {
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    margin: 0px;
+    word-wrap: no-wrap;
+    font-weight: 300;
+    text-overflow: ellipsis; }
+
+/*# sourceMappingURL=app.css.map */
