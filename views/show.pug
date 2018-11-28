@@ -10,6 +10,7 @@ article.card.persona
         a(data-action="goto" href="/persona/"+result.found.id+'/edit')
             i.fas.fa-edit
         
-        a(data-action="delete" href="/persona/"+result.found.id)
-            i.fas.fa-trash
+        form(action="/persona/"+result.found.id, method="DELETE")
+            button(type="submit")
+                i.fas.fa-trash
 

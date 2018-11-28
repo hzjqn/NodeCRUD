@@ -106,9 +106,16 @@ app.get('/api/persona/:id', (req, res) => {
 })
 
 app.delete('/api/persona/:id', (req, res) => {
-    console.log('delete');
-    let persona = DB.delete(req.body.id);
-    return res.send(persona ? persona : 'No existe esa persona');
+    
+    DB.delete(req.params.id)
+    
+    let params = {
+        title: "Todas las personas",
+        view: pug.compileFile('./views/index_personas.pug')({
+            results: JSON.parse(DB.all())
+        })
+    };
+    return res.send(JSON.stringify(params));
 })
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));

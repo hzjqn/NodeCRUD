@@ -1,172 +1,83 @@
-window.addEventListener('DOMContentLoaded', (e) => {
+window.addEventListener('DOMContentLoaded', () => {
 
-    const app = document.getElementById('app');
 
-    const initializeInnerLinks = () => {
-
-        let links = document.querySelectorAll('a:not(.outwards)');
-
-        for(let i = 0; i < links.length; i++){
-
-            links[i].addEventListener('click', function(e){
-
+    initForms = (parent) => {
+        let forms = parent.querySelectorAll('form');
+        for (let i = 0; i < forms.length; i++) {
+            const form = forms[i];
+            form.addEventListener('submit', function(e){
                 e.preventDefault();
-
-                if(links[i].dataset.action == 'goto'){
-
-                    goTo(this.getAttribute('href'));
-
-                } else if (links[i].dataset.action == 'delete') {
-
-                    deletePerson(this.getAttribute('href'), this.dataset.id);
-                }
-
-            });
+                changeView(this.getAttribute('action'), {
+                    form: this
+                }, function(){
+                    initLinks(app);
+                    initForms(app);
+                })
+            })
         }
     }
 
-    
-    const initializeForms = () => {
-
-        let forms = document.querySelectorAll('form:not(.outwards)');  
-
-        for(let i = 0; i < forms.length; i++){
-
-            forms[i].addEventListener('submit', function(e){
-
-                e.preventDefault();
-
-            });
-        }
-    }
-    
-    const initializeSearchBar = () => {
-
-        let searchBar = document.querySelector('input#searchBar');
-
+    initSearchBar = () => {
+        const searchBar = document.getElementById('searchBar');
         searchBar.addEventListener('input', function(e){
-
+            val = this.value
             e.preventDefault();
-
-            search(this.value);
-
-        });
+            if(val.length){
+                changeView('/search/'+this.value, {}, function(){
+                    initLinks(app);
+                    initForms(app);
+                })
+            }else{
+                changeView(this,'/restore', {}, function(){
+                    initLinks(app);
+                    initForms(app);
+                })
+            }
+        })
     }
-    
-    const search = (value) => {
 
-        if(value.length){
-
-            fetch('/api/search/'+value)
-
-            .then((res) => {
-
-                return res.json()
-
-            })
-
-            .then((res) => {
-
-                app.innerHTML = res.view;
-
-                initializeInnerLinks();
-                initializeForms();
-
-            })
-
-            .catch((res) => {
-
-                console.log('Error! => '+res);
-
-            });
-
-        } else {
-
-            fetch('/api/restore')
-
-            .then((res) => {
-
-                return res.json()
-
-            })
-
-            .then((res) => {
-
-                app.innerHTML = res.view
-
-                initializeInnerLinks();
-                initializeForms();
-
-            })
-
-            .catch((res) => {
-
-                console.log('Error! => '+res)
-
-            });
-
+    initLinks = (parent) => {
+        let links = parent.querySelectorAll('a');
+        console.log(links)
+        for (let i = 0; i < links.length; i++) {
+            const link = links[i];
+            if(links[i].dataset.action = 'togo') {
+                link.addEventListener('click', function(e){
+                    e.preventDefault();
+                    changeView(this.getAttribute('href'), {}, function(){
+                        initLinks(app);
+                        initForms(app);
+                    })
+                })
+            }
         }
     }
-    
-    const deletePerson = (href, id) => {
 
-        formData = new FormData()
+    changeView = (url, object, callback) => {
+        if(object.form){
+            console.log(object.form, object.form.getAttribute('method').toUpperCase())
+            console.log('its a form')
+            object = {
+                method: object.form.getAttribute('method').toUpperCase(),
+                body: new FormData(object.form)
+            }
+        }
 
-        formData.append('id', JSON.stringify(id));
-
-        fetch('/api'+href, {
-
-            method: 'DELETE',
-
-            body: formData
-
-        })
-        
-        .then(res =>{
-
+        fetch('/api'+url, object)
+        .then((res)=>{
             return res.json();
         })
-        
-        .then(res =>{
-
-            callback(res);
-
-        })
-        
-        .catch(res =>{
-
-            error(res);
-
-        });
-    }
-    
-    const goTo = (href) => {
-        
-        fetch('/api'+href)
-        
-        .then(res =>{
-
-            return res.json();
-            
-        })
-        
-        .then(res =>{
-
-            console.log('goto')
+        .then((res)=>{
             app.innerHTML = res.view;
-            initializeInnerLinks();
-            initializeForms();
-
+            callback();
         })
-        
-        .catch(res =>{
-
-            error(res);
-
-        });
+        .catch((error)=>{
+            console.log(error);
+        })
     }
 
-    initializeInnerLinks();
-    initializeSearchBar();
-    initializeForms();
+    initLinks(document);
+    initForms(document);
+    initSearchBar();
+
 });

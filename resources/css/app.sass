@@ -77,10 +77,14 @@ nav.navbar
 
 .actions
         display: flex
-        
+
         &.column    
             flex-direction: column
-        a
+        a, button
+            cursor: pointer
+            border: none
+            background: transparent
+            color: $_primary
             text-decoration: none
             display: block
             padding: .5em

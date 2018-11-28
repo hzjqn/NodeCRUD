@@ -80,38 +80,42 @@ nav.navbar {
   .actions.column {
     flex-direction: column; }
   /* line 83, ../../resources/css/app.sass */
-  .actions a {
+  .actions a, .actions button {
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    color: #0099ff;
     text-decoration: none;
     display: block;
     padding: 0.5em; }
-    /* line 87, ../../resources/css/app.sass */
-    .actions a i {
+    /* line 91, ../../resources/css/app.sass */
+    .actions a i, .actions button i {
       display: inline-flex;
       justify-content: center;
       align-items: center;
       width: 24px;
       height: 24px; }
-    /* line 93, ../../resources/css/app.sass */
-    .actions a span {
+    /* line 97, ../../resources/css/app.sass */
+    .actions a span, .actions button span {
       padding: 0.5em; }
 
-/* line 97, ../../resources/css/app.sass */
+/* line 101, ../../resources/css/app.sass */
 .card.persona {
   background: #fff;
   border-radius: 0.25em;
   padding: 0.5em;
   margin: 0.5em 0px; }
-  /* line 103, ../../resources/css/app.sass */
+  /* line 107, ../../resources/css/app.sass */
   .card.persona .card-info {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center; }
     @media (min-width: 480px) {
-      /* line 109, ../../resources/css/app.sass */
+      /* line 113, ../../resources/css/app.sass */
       .card.persona .card-info {
         flex-direction: row; } }
-  /* line 112, ../../resources/css/app.sass */
+  /* line 116, ../../resources/css/app.sass */
   .card.persona h1,
   .card.persona h2,
   .card.persona h3,
