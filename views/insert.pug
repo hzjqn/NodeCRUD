@@ -1,11 +1,11 @@
-form(action="/personas/new" method="post")
-    label(for="nombre")
-    input(type="text" name="nombre" value=+inputs.old.nombre ? inputs.old.nombre : '')
+form(action="/persona/new" method="post")
+    label(for="nombre") nombre
+    input(type="text" name="nombre")
 
-    label(for="apellido")
-    input(type="text" name="apellido" value=+inputs.old.apellido ? inputs.old.apellido : '')
+    label(for="apellido") apellido
+    input(type="text" name="apellido")
 
-    label(for="email")
-    input(type="email" name="email" value=+inputs.old.email ? inputs.old.email : '')
+    label(for="email") email
+    input(type="email" name="email")
 
     button(type="submit") Crear

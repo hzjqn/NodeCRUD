@@ -2,11 +2,12 @@ const express = require('express');
 const fs = require('fs');
 const pug = require('pug');
 const bodyParser = require('body-parser');
+const formidable = require('express-formidable');
 const DB = require('./classes/DB.js');
 const app = express();
 const port = 3000;
 
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(formidable({type: 'multipart'}));
 app.use(express.static('public'));
 app.locals.pretty = true; // Deberia borrarse en production
 app.set('views', './views');
@@ -51,8 +52,7 @@ app.get('/api/search/:search', (req, res) => {
         title: "Busqueda",
         view: pug.compileFile('./views/search.pug')(
             {
-                results: JSON.parse(DB.findSearch(req.params.search))
-            
+                results: JSON.parse(DB.findSearch(req.params.search))   
             }
         )
     };
@@ -62,17 +62,19 @@ app.get('/api/search/:search', (req, res) => {
 
 
 app.get('/api/persona/new', (req, res) => {
-
     let params = {
         title: "Nueva Persona",
         view: pug.compileFile('./views/insert.pug')({
-            req: req,
-            errors: errors
         })
     };
 
     return res.send(JSON.stringify(params));
 });
+
+app.post('/api/persona/new', (req, res) => {
+    console.log(req.fields)
+    let create = DB.create({nombre: req.fields.nombre, apellido: req.fields.apellido, email: req.fields.email});
+})
 
 app.get('/api/persona/index', (req, res) => {
     let params = {

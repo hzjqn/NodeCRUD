@@ -20,15 +20,16 @@ window.addEventListener('DOMContentLoaded', () => {
     initSearchBar = () => {
         const searchBar = document.getElementById('searchBar');
         searchBar.addEventListener('input', function(e){
-            val = this.value
             e.preventDefault();
+            val = this.value
+            console.log(val)
             if(val.length){
                 changeView('/search/'+this.value, {}, function(){
                     initLinks(app);
                     initForms(app);
                 })
             }else{
-                changeView(this,'/restore', {}, function(){
+                changeView('/restore', {}, function(){
                     initLinks(app);
                     initForms(app);
                 })
@@ -55,12 +56,12 @@ window.addEventListener('DOMContentLoaded', () => {
 
     changeView = (url, object, callback) => {
         if(object.form){
-            console.log(object.form, object.form.getAttribute('method').toUpperCase())
-            console.log('its a form')
             object = {
                 method: object.form.getAttribute('method').toUpperCase(),
-                body: new FormData(object.form)
+                body: new FormData(object.form) 
             }
+
+            console.log(object.form.entries)
         }
 
         fetch('/api'+url, object)

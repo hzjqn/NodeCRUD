@@ -53,22 +53,45 @@ module.exports = class DB {
     }
 
     // Salvar un objeto en personas
-    static save(object){
+    static create(object){
         let personas = JSON.parse(this.File()).personas;
+        let newId = personas[personas.length-1].id + 1
         let newPersona = {
-            id: personas.length,
+            id: newId,
             nombre: object.nombre,
             apellido: object.apellido,
             confirmado: false,
             email: object.email
         }
         personas.push(newPersona);
-        fs.writeFile('./personas.json', JSON.stringify({personas: personas}, null, 2), function(err){
+        fs.writeFileSync('./personas.json', JSON.stringify({personas: personas}, null, 2), function(err){
             return 'ERROR!: '+err;
         });
-        return JSON.stringify({
-            message: "ok"
+        return this.find(newPersona.id);
+    }
+
+    // Salvar un objeto en personas
+    static edit(object){
+        let personas = JSON.parse(this.File()).personas;
+        for (let i = 0; i < personas.length; i++) {
+            const pers = personas[i];
+            if(pers.id == object.id){
+                persona = pers
+                index = personas.indexOf(pers)
+            }
+        }
+        let newPersona = {
+            id: persona.id,
+            nombre: object.nombre,
+            apellido: object.apellido,
+            confirmado: false,
+            email: object.email
+        }
+        personas[index] = newPersona;
+        fs.writeFileSync('./personas.json', JSON.stringify({personas: personas}, null, 2), function(err){
+            return 'ERROR!: '+err;
         });
+        return this.find(newPersona.id);
     }
 
     // Borrar una persona del json
