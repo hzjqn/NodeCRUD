@@ -1,11 +1,19 @@
-form(action="/persona/new" method="post")
-    label(for="nombre") nombre
-    input(type="text" name="nombre")
-
-    label(for="apellido") apellido
-    input(type="text" name="apellido")
-
-    label(for="email") email
-    input(type="email" name="email")
-
-    button(type="submit") Crear
+form(action="/persona/new" success="/persona/index" method="post")
+	label(for="nombre") nombre
+	input(type="text" name="nombre" value=+(old != null) ? 'nombre' in old ? old.nombre : '' : ''  required)
+	if errors != null
+		if ('apellido' in errors)
+			span.error #{errors.apellido}
+	label(for="apellido") apellido
+	input(type="text" name="apellido" value=+(old != null) ? 'apellido' in old ? old.apellido : '' : '' required)
+	if errors != null
+		if 'apellido' in errors
+			span.error #{errors.apellido}
+			
+	label(for="email") email
+	input(type="email" name="email" value=+(old != null) ? 'email' in old ? old.email : '' : '' required)
+	if errors != null
+		if ('email' in errors)
+			span.error #{errors.email}
+			
+	button(type="submit") Crear

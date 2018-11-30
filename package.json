@@ -6,6 +6,7 @@
     "express": "^4.16.4",
     "express-formidable": "^1.2.0",
     "fs": "0.0.1-security",
+    "lodash": "^4.17.11",
     "pug": "^2.0.3",
     "react": "^16.6.3",
     "webpack": "^4.26.1"

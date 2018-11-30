@@ -1,8 +1,7 @@
 'use strict';
 const fs = require('fs')
 
-module.exports = class DB {
-
+class DB {
     // Acceso al contenido de personas.json
     static File(){
         return fs.readFileSync('./personas.json', 'utf-8');
@@ -10,16 +9,20 @@ module.exports = class DB {
 
     // Traer todas las personas
     static all(){
-        console.log(this.File());
         let personas = JSON.parse(this.File()).personas;
-        let foundPersonas = [];
-        for(let i = 0; i < personas.length; i++){
-            foundPersonas.push({
-                searched: 'all',
-                found: personas[i]
-            });
+
+        if(!personas){
+            response = {
+                status: "fail",
+                data: personas
+            }
         }
-        return JSON.stringify(foundPersonas);
+        let response = {
+            status: "ok",
+            data: personas
+        }
+
+        return JSON.stringify(response);
     }
 
     // Traer una sola persona por id
@@ -34,7 +37,17 @@ module.exports = class DB {
                 });
             }
         }
-        return JSON.stringify(foundPersonas);
+        let response = {
+            status: "ok",
+            data: foundPersonas
+        }
+        if(!foundPersonas){
+            response = {
+                status: "not found",
+                data: foundPersonas
+            }
+        }
+        return JSON.stringify(response);
     }
 
     // Traer una sola persona por id
@@ -49,7 +62,17 @@ module.exports = class DB {
                 };
             }
         }
-        return JSON.stringify(foundPersona);
+        let response = {
+            status: "ok",
+            data: foundPersona
+        }
+        if(!foundPersona){
+            response = {
+                status: "not found",
+                data: foundPersona
+            }
+        }
+        return JSON.stringify(response);
     }
 
     // Salvar un objeto en personas
@@ -96,6 +119,7 @@ module.exports = class DB {
 
     // Borrar una persona del json
     static delete(id){
+        let initialPersonas = JSON.parse(this.File()).personas;
         let personas = JSON.parse(this.File()).personas;
         for(let i = 0; i < personas.length; i++){
             if(personas[i].id == id){
@@ -103,8 +127,23 @@ module.exports = class DB {
                 let toReturn = fs.writeFileSync('./personas.json', JSON.stringify({personas:personas}, null, 2), function(err){
                     return 'ERROR!: '+err;
                 });
-                return JSON.parse(this.File()).personas
             }
         }
+
+        let response = {
+            status: "ok",
+            data: personas
+        }
+        
+        if(initialPersonas == personas){
+            response = {
+                status: "fail",
+                data: personas
+            }
+        }
+
+        return JSON.stringify(response);
     }
 }
+
+module.exports = DB;

@@ -1,0 +1,11 @@
+form(action="/persona/new" success="/persona/index" method="post")
+    label(for="nombre") nombre
+    input(type="text" name="nombre" required)
+
+    label(for="apellido") apellido
+    input(type="text" name="apellido" required)
+
+    label(for="email") email
+    input(type="email" name="email" required)
+
+    button(type="submit") Crear

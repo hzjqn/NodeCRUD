@@ -109,7 +109,29 @@ nav.navbar {
     font-weight: 300;
     text-overflow: ellipsis; }
 
-form input, form label {
+form button {
+  margin: 1em 0em;
+  background: #0099ff;
+  border: none;
+  border-radius: 0.15em;
+  padding: 0.4em 0.8em; }
+form input {
+  border: none;
+  border-radius: 0.15em;
+  padding: 0.4em 0.8em;
+  width: 100%;
   display: block; }
+form label {
+  border: none;
+  border-radius: 0.15em;
+  padding: 0.4em 0em;
+  width: 100%;
+  display: block; }
+form span.error {
+  padding: 0.4rem 0.8rem;
+  font-size: 11px;
+  display: block;
+  background: red;
+  color: white; }
 
 /*# sourceMappingURL=app.css.map */

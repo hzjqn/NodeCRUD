@@ -6,11 +6,11 @@ if results !== undifined
         article.card.persona 
             .card-info
                 div.info
-                    h4.card-title #{result.found.nombre+ ' ' +result.found.apellido}
-                    h5 ID: #{result.found.id}
-                    h5 Email: #{result.found.email}
+                    h4.card-title #{result.nombre+ ' ' +result.apellido}
+                    h5 ID: #{result.id}
+                    h5 Email: #{result.email}
                 div.actions
-                    a(data-action="goto" href='/persona/'+result.found.id)
+                    a(data-action="goto" href='/persona/'+result.id)
                         i.fas.fa-arrow-right
 
     else
