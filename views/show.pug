@@ -7,10 +7,8 @@ article.card.persona
     h3 Confirmado: #{result.found.confirmado ? "Si" : "No"} 
 
     aside.actions
-        a(data-action="goto" href="/persona/"+result.found.id+'/edit')
-            i.fas.fa-edit
+        a(data-action="goto" href="/persona/"+result.found.id+'/edit') <i class="fas fa-edit"></i> Editar
         
         form(action="/persona/"+result.found.id, data-success="/persona/index", method="DELETE")
-            button(type="submit")
-                i.fas.fa-trash
+            button(type="submit") <i class="fas fa-trash"></i> Borrar
 
