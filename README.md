@@ -7,7 +7,7 @@ Retorna un JSON con todas las personas en personas.json
 #### Formato:
 ```json
 {
-"status": "ok", // o "fail"
+"status": "ok",
 "data": [Personas, ...]
 }
 
@@ -18,7 +18,7 @@ Retorna un JSON con los datos de la persona con id = #id
 #### Formato:
 ```json
 {
-"status": "ok", // o "fail"
+"status": "ok",
 "data": Persona con id #id
 }
 ```
@@ -30,7 +30,7 @@ Retorna un JSON con los datos de la operacion.
 #### Formato
 ```json
 {
-	"status": "ok", // o "fail"
+	"status": "ok",
 	"data": [Personas, ...],
 	"errors": {
 			"input": // Mensaje de error
@@ -57,7 +57,7 @@ Retorna un JSON con los datos de la operacion.
 #### Formato
 ```json
 {
-	"status": "ok", // o "fail"
+	"status": "ok",
 	"data": [Personas, ...],
 	"errors": {
 			"input": mensaje de error,
@@ -71,8 +71,8 @@ Retorna un JSON con los datos de la operacion.
 	},
 	// Adicionalmente retorna una vista
 	"view": {
-		"title": Titulo de una view,
-		"html": html de la vista
+		"title": "Titulo de una vista",
+		"html": "html de la vista"
 	}
 }
 ```
