@@ -119,16 +119,19 @@ app.get('/api/persona/:id/edit', (req, res) => {
 app.post('/api/persona/new', (req, res) => {
     let persona = {nombre: req.fields.nombre, apellido: req.fields.apellido, email: req.fields.email}
     let errors = Validation.validateNewPersona(persona);
-    let apiReturn = errors;
+    let apiReturn = null
+    if(JSON.stringify(errors) == JSON.stringify({})){
+        errors = false;
+    }
     if(!errors){
-        let apiReturn = DB.create(persona);
+        apiReturn = DB.create(persona);
     }
     let response = {
         status: errors ? "ok" : "failed",
         errors: errors,
         view: {
             title: "Nueva Persona",
-            html: pug.compileFile('./views/insert.pug')({errors: errors})}
+            html: pug.compileFile('./views/insert.pug')({old: persona, errors: errors})}
     }
     return res.send(response)
 })
@@ -142,7 +145,9 @@ app.patch('/api/persona/:id/edit', (req, res) => {
     let oldPersona = JSON.parse(DB.find(req.params.id)).data.found
     let persona = {id: req.params.id, nombre: req.fields.nombre, apellido: req.fields.apellido, email: req.fields.email}
     let errors = Validation.validatePersonaEdition(persona, oldPersona);
-
+    if(JSON.stringify(errors) == JSON.stringify({})){
+        errors = false;
+    }
     if(!errors){
         let apiReturn = DB.edit(persona, oldPersona);
     }
@@ -176,14 +181,16 @@ app.get('/api/persona/:id', (req, res) => {
 
 app.delete('/api/persona/:id', (req, res) => {
     
-    status = DB.delete(req.params.id)
+    let status = DB.delete(req.params.id)
     
     let params = {
         status: status,
-        title: "Todas las personas",
-        view: pug.compileFile('./views/index_personas.pug')({
-            results: JSON.parse(DB.all())
-        })
+        view:{
+            title: "Todas las personas",
+            html: pug.compileFile('./views/index_personas.pug')({
+                results: JSON.parse(DB.all())
+            })
+        }
     };
 
     return res.send(JSON.stringify(params));

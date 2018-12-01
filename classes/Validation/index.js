@@ -121,7 +121,6 @@ class Validation
                 errors['email'] = error;
 
         }
-        console.log(object.email, oldobject.email)
         if(!object.email == oldobject.email){
             let error = this.validateEmail(object.email);
             if(error)
