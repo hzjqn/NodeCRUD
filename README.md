@@ -80,7 +80,7 @@ Espera un formulario tipo multipart/form-data con los campos *"nombre"*, *"apell
 
 Retorna un JSON con los datos de la operacion.
 #### Formato
-```json
+```
 {
 	"status": "ok",
 	"data": [Personas, ...],
@@ -107,7 +107,7 @@ Borra el objeto persona con id = #id de personas.json.
 Retorna los datos de la operacion y todas las personas restantes.
 
 #### Formato
-```json
+```
 {
 	"status": "ok",
 	"data": [Personas, ...]
