@@ -19,7 +19,23 @@ Retorna un JSON con los datos de la persona con id = #id
 ```json
 {
 "status": "ok",
-"data": Persona con id #id
+"data": {
+        "searched": "id",
+        "found": Objeto Persona
+    }
+}
+```
+
+### GET: "/api/search/#"
+Retorna un JSON con los datos de la o las personas con nombre, apellido y/o email coincidiendo con #
+#### Formato:
+```json
+{
+"status": "ok",
+"data": {
+        "searched": "#",
+        "found": Objeto Persona
+    }
 }
 ```
 
