@@ -2,10 +2,10 @@
   "personas": [
     {
       "id": 0,
-      "nombre": "Aurelia",
+      "nombre": "Aelia",
       "apellido": "Osborn",
-      "email": "aureliaosborn@lovepad.com",
-      "confirmado": false
+      "confirmado": false,
+      "email": "aureliaosborn@lovepad.com"
     },
     {
       "id": 1,

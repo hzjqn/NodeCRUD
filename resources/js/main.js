@@ -50,7 +50,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 app.innerHTML = res.view.html
                 callback()
             } else {
-                changeView(from.dataset.success, {}, function(){})
+                changeView(form.dataset.success, {}, function(){})
             };
         })
         .catch((error)=>{
