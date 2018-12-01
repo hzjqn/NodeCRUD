@@ -7,7 +7,7 @@ Retorna un JSON con todas las personas en personas.json
 #### Formato:
 ```json
 {
-"status": "ok"  /  "fail",
+"status": "ok", // o "fail"
 "data": [Personas, ...]
 }
 
@@ -18,7 +18,7 @@ Retorna un JSON con los datos de la persona con id = #id
 #### Formato:
 ```json
 {
-"status": "ok"  /  "fail",
+"status": "ok", // o "fail"
 "data": Persona con id #id
 }
 ```
@@ -27,16 +27,15 @@ Retorna un JSON con los datos de la persona con id = #id
 #### Formato:
 ```json
 {
-	"status": "ok"  /  "fail",
+	"status": "ok", // o "fail"
 	"data": [Personas, ...]}
 	"errors": {
-			"input": mensaje de error,
-			...
+            "input": // mensaje de error,
 	},
 	// Adicionalmente retorna una vista
 	"view": {
-		"title": "Titulo de una view",
-		"html": html de la vista
+		"title": "Titulo de una vista",
+		"html": "html de la vista"
 	}
 }
 ```
@@ -47,21 +46,20 @@ Retorna un JSON con los datos de la operacion.
 #### Formato
 ```json
 {
-	"status": "ok"  /  "fail",
+	"status": "ok", // o "fail"
 	"data": [Personas, ...]}
 	"errors": {
-			"input": mensaje de error,
-			...
+			"input": // Mensaje de error
 	},
 	"old": {
-		"nombre": nombre enviado
-		"apellido": apellido enivado
-		"email": email enviado
+		"nombre": "", // nombre enviado
+		"apellido": "", // apellido enivado
+		"email": "", // email enviado
 	},
 	// Adicionalmente retorna una vista
 	"view": {
-		"title": "Titulo de una view",
-		"html": html de la vista
+		"title": "Titulo de una vista",
+		"html": "html de la vista"
 	}
 }
 ```
@@ -75,7 +73,7 @@ Retorna
 #### Formato
 ```json
 {
-	"status": "ok"  /  "fail",
+	"status": "ok", // o "fail"
 	"data": [Personas, ...]}
 	"errors": {
 			"input": mensaje de error,
@@ -101,8 +99,10 @@ Retorna los datos de la operacion y todas las personas restantes.
 #### Formato
 ```json
 {
-	"status": "ok"  /  "fail",
-	"data": [Personas, ...]
+	"status": "ok", // o "fail"
+	"data": [
+        // ... Todas las personas restantes
+    ]
 }
 ```
 
