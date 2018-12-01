@@ -14,7 +14,7 @@ node app.js
 Retorna un JSON con todas las personas en personas.json
 
 #### Formato:
-```json
+```
 {
 "status": "ok",
 "data": [Personas, ...]
@@ -25,7 +25,7 @@ Retorna un JSON con todas las personas en personas.json
 ### GET: "/api/personas/#id"
 Retorna un JSON con los datos de la persona con id = #id
 #### Formato:
-```json
+```
 {
 "status": "ok",
 "data": {
@@ -38,7 +38,7 @@ Retorna un JSON con los datos de la persona con id = #id
 ### GET: "/api/search/#"
 Retorna un JSON con los datos de la o las personas con nombre, apellido y/o email coincidiendo con #
 #### Formato:
-```json
+```
 {
 "status": "ok",
 "data": {
@@ -53,7 +53,7 @@ Espera un formulario tipo multipart/form-data con los campos *"nombre"*, *"apell
 
 Retorna un JSON con los datos de la operacion.
 #### Formato
-```json
+```
 {
 	"status": "ok",
 	"data": [Personas, ...],
