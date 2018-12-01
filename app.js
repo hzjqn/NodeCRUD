@@ -3,6 +3,7 @@
 const express = require('express');
 const fs = require('fs');
 const _ = require('lodash')
+const opn = require('opn')
 const DB = require('./classes/DB/index.js');
 const Validation = require('./classes/Validation/index.js')
 const bodyParser = require('body-parser');
@@ -17,8 +18,10 @@ app.locals.pretty = true; // Deberia borrarse en production
 app.set('views', './views');
 app.set('view engine', 'pug');
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`));
-
+app.listen(port, () => {
+    console.log(`Escuchando puerto ${port}`)
+    opn('http://localhost:3000');
+});
 // Index
 app.get('/', (req, res) => {
 
