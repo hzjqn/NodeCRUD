@@ -1,6 +1,5 @@
 window.addEventListener('DOMContentLoaded', () => {
     const app = document.getElementById('app')
-    const title = document.title;
 
     initForms = (parent) => {
         let forms = parent.querySelectorAll('form');
@@ -47,6 +46,7 @@ window.addEventListener('DOMContentLoaded', () => {
         .then((res)=>{
             if(res.errors){
                 console.log(res)
+                document.title = res.view.title;
                 app.innerHTML = res.view.html
                 callback()
             } else {
@@ -99,8 +99,10 @@ window.addEventListener('DOMContentLoaded', () => {
             return res.json();
         })
         .then((res)=>{
+            document.title = res.view.title;
             app.innerHTML = res.view.html;
-            callback();
+            initLinks(app);
+            initForms(app);
         })
         .catch((error)=>{
             console.log(error);

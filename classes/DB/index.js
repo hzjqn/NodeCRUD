@@ -94,23 +94,17 @@ class DB {
     }
 
     // Salvar un objeto en personas
-    static edit(object){
+    static edit(persona, oldPersona){
+        console.log('editando', persona, oldPersona)
         let personas = JSON.parse(this.File()).personas;
-        for (let i = 0; i < personas.length; i++) {
-            const pers = personas[i];
-            if(pers.id == object.id){
-                persona = pers
-                index = personas.indexOf(pers)
-            }
-        }
         let newPersona = {
-            id: persona.id,
-            nombre: object.nombre,
-            apellido: object.apellido,
+            id: oldPersona.id,
+            nombre: persona.nombre,
+            apellido: persona.apellido,
             confirmado: false,
-            email: object.email
+            email: persona.email
         }
-        personas[index] = newPersona;
+        personas[oldPersona.id] = newPersona;
         fs.writeFileSync('./personas.json', JSON.stringify({personas: personas}, null, 2), function(err){
             return 'ERROR!: '+err;
         });

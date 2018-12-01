@@ -17,7 +17,7 @@ app.locals.pretty = true; // Deberia borrarse en production
 app.set('views', './views');
 app.set('view engine', 'pug');
 
-console.log(DB.File());
+app.listen(port, () => console.log(`Example app listening on port ${port}!`));
 
 // Index
 app.get('/', (req, res) => {
@@ -55,7 +55,6 @@ app.get('/api/restore', (req, res) => {
 app.get('/api/search/:search', (req, res) => {
 
     let apiReturn = JSON.parse(DB.findSearch(req.params.search));
-    console.log("SEARCH !!!!!!!!!!!!!!!!!!!!!!!!!!!", apiReturn)
     let params = {
         status: apiReturn.status,
         data: apiReturn.data,
@@ -70,7 +69,6 @@ app.get('/api/search/:search', (req, res) => {
 
 app.get('/api/persona/index', (req, res) => {
     let apiReturn = JSON.parse(DB.all());
-    console.log('index ======', apiReturn.data)
     let params = {
         view: {
             title: "Todas las personas",
@@ -101,11 +99,12 @@ app.get('/api/persona/:id/edit', (req, res) => {
             title: "Nueva Persona",
             html: pug.compileFile('./views/edit.pug')({
                 old: {
-                    nombre: apiReturn.data.nombre,
-                    apellido: apiReturn.data.apellido,
-                    email: apiReturn.data.email
+                    id: req.params.id,
+                    nombre: apiReturn.data.found.nombre,
+                    apellido: apiReturn.data.found.apellido,
+                    email: apiReturn.data.found.email
                 },
-                errors: apiReturn.data.errors
+                errors: apiReturn.errors
             })
         } 
     };
@@ -118,36 +117,56 @@ app.get('/api/persona/:id/edit', (req, res) => {
 // Data services
 
 app.post('/api/persona/new', (req, res) => {
-    console.log(req.fields)
     let persona = {nombre: req.fields.nombre, apellido: req.fields.apellido, email: req.fields.email}
     let errors = Validation.validateNewPersona(persona);
     let apiReturn = errors;
-    if(!errors){    
+    if(!errors){
         let apiReturn = DB.create(persona);
     }
     let response = {
+        status: errors ? "ok" : "failed",
         errors: errors,
-        old: persona,
         view: {
             title: "Nueva Persona",
-            html: pug.compileFile('./views/insert.pug')({old: persona, errors})}
+            html: pug.compileFile('./views/insert.pug')({errors: errors})}
     }
     return res.send(response)
 })
+
 
 app.get('/api/persona/all', (req, res) => {
     return res.send(DB.all());
 })
 
+app.patch('/api/persona/:id/edit', (req, res) => {
+    let oldPersona = JSON.parse(DB.find(req.params.id)).data.found
+    let persona = {id: req.params.id, nombre: req.fields.nombre, apellido: req.fields.apellido, email: req.fields.email}
+    let errors = Validation.validatePersonaEdition(persona, oldPersona);
+
+    if(!errors){
+        let apiReturn = DB.edit(persona, oldPersona);
+    }
+    
+    let response = {
+        status: errors ? "ok" : "failed",
+        errors: errors,
+        old: persona,
+        view: {
+            title: "Editando: " + oldPersona.nombre+" "+oldPersona.apellido,
+            html: pug.compileFile('./views/edit.pug')({old: persona, errors: errors})
+        }
+    }
+    return res.send(response)
+})
 
 app.get('/api/persona/:id', (req, res) => {
     let persona = JSON.parse(DB.find(req.params.id));
-    console.log(persona)
     let params = {
+        result: persona.data,
         view: {
             title: persona.data.found.nombre+" "+persona.data.found.apellido,
             html: pug.compileFile('./views/show.pug')({
-            result: persona.data
+                result: persona.data
             })
         }
     };
@@ -157,15 +176,15 @@ app.get('/api/persona/:id', (req, res) => {
 
 app.delete('/api/persona/:id', (req, res) => {
     
-    DB.delete(req.params.id)
+    status = DB.delete(req.params.id)
     
     let params = {
+        status: status,
         title: "Todas las personas",
         view: pug.compileFile('./views/index_personas.pug')({
             results: JSON.parse(DB.all())
         })
     };
+
     return res.send(JSON.stringify(params));
 })
-
-app.listen(port, () => console.log(`Example app listening on port ${port}!`));

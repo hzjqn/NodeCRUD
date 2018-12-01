@@ -2,7 +2,6 @@
 
 const _ = require('lodash');
 const DB = require('./../DB');
-console.log('Validation loaded');
 
 const messages = {
     email: {
@@ -67,7 +66,6 @@ class Validation
     }
 
     static validateEmail(string) {
-        console.log('validating email')
         let error = null
         let uniqueEmail = () => {
             let personas = JSON.parse(DB.File()).personas;
@@ -75,78 +73,63 @@ class Validation
                 const persona = personas[i];
                 if(this.objectsHaveSame('email', persona, string, true)){
                     return true
-                } else {
-                    return false
                 }
             }
+            return false
         }
         if(!string.match(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/)){
             error = messages.email.format
-        } else if (!uniqueEmail(string)) {
+        } else if (uniqueEmail(string)) {
             error = messages.email.unique
         }
         return error
     }
 
     static validateNewPersona(object) {
-        console.log(object.nombre)
         let errors = {}
         if(_.has(object, 'nombre')){
             let error = this.validateNombre(object.nombre);
             if(error)
                 errors['nombre'] = error;
-        } else {
-            error['nombre'] = 'null'
         }
         if(_.has(object, 'apellido')){
-            let error = this.validateApellido(object.apellido);
+            let error = this.validateEmail(object.email);
             if(error)
-                errors['apellido'] = error;
-        } else {
-            error['apellido'] = 'null'
+                errors['email'] = error;
         }
         if(_.has(object, 'email')){
             let error = this.validateEmail(object.email);
             if(error)
                 errors['email'] = error;
-        } else {
-            error['email'] = 'null'
         }
         return errors;
     }
 
-    static validatePersonaEdition(object) {
-        errors = null
-        validateUniquePersona(object)
-
-        if(_.has(object, 'id')){
-            let error = this.validateId(object.email);
-            if(error)
-                errors['email'] = error;
-        } else {
-            error['email'] = 'null'
+    static validatePersonaEdition(object, oldobject) {
+        let errors = {}
+        if(!object.id == oldobject.id){
+            return errors['id'] == 'fatal'
         }
-        if(_.has(object, 'nombre')){
-            let error = this.validateNombre(object.nombre);
+        if(!object.nombre == oldobject.nombre){
+            let error = this.validateNombre(object.nombre)
             if(error)
-                errors['nombre'] = error;
-        } else {
-            error['nombre'] = 'null'
+                errorr['nombre'] = error
         }
-        if(_.has(object, 'apellido')){
-            let error = this.validateApellido(object.apellido);
-            if(error)
-                errors['apellido'] = error;
-        } else {
-            error['apellido'] = 'null'
-        }
-        if(_.has(object, 'email')){
+        if(!object.apellido == oldobject.apellido){
             let error = this.validateEmail(object.email);
             if(error)
                 errors['email'] = error;
-        } else {
-            error['email'] = 'null'
+
         }
+        console.log(object.email, oldobject.email)
+        if(!object.email == oldobject.email){
+            let error = this.validateEmail(object.email);
+            if(error)
+                errors['email'] = error;
+
+        }
+
+        return errors
     }
 }
 
