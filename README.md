@@ -1,3 +1,12 @@
+Para iniciar la aplicacion correr:
+
+```
+npm install
+```
+
+```
+node app.js
+```
 
 # API
 ## Routes
