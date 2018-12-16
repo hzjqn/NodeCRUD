@@ -10,8 +10,10 @@ const bodyParser = require('body-parser');
 const formidable = require('express-formidable');
 const pug = require('pug');
 const app = express();
-const port = 3000;
+const port = 3001;
+const cors = require('cors');
 
+app.use(cors())
 app.use(formidable({type: 'multipart'}));
 app.use(express.static('public'));
 app.locals.pretty = true; // Deberia borrarse en production
@@ -56,7 +58,6 @@ app.get('/api/restore', (req, res) => {
     return res.send(JSON.stringify(params));
 });
 app.get('/api/search/:search', (req, res) => {
-
     let apiReturn = JSON.parse(DB.findSearch(req.params.search));
     let params = {
         status: apiReturn.status,
